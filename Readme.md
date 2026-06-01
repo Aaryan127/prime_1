@@ -19,7 +19,7 @@
 
 ## Implementation
 
-Implement ResNet-18 and train it on CIFAR-10.
+Implement ResNet-18 and train it on CIFAR-10 [Dataset Link](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 You may use:
 
