@@ -1,5 +1,5 @@
 ## TODOs:
-- [ ] Read the resnet paper
+- [X] Read the resnet paper
 - [ ] IMplement on CIFAR
 - [ ] Read attn
 
