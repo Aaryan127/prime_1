@@ -1,3 +1,8 @@
+## TODOs:
+- [ ] Read the resnet paper
+- [ ] IMplement on CIFAR
+- [ ] Read attn
+
 # Week 1: Foundations
 
 # Task 1: Convolutional Neural Networks
