@@ -66,6 +66,7 @@ Focus on understanding the attention mechanism rather than every implementation 
 
 ## Supporting Resources
 
+Can refer to StatQuest for primers on RNNs, LSTMs, Seq2Seq models.
 * Illustrated Transformer
 
   * https://jalammar.github.io/illustrated-transformer/
