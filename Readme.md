@@ -1,6 +1,6 @@
 ## TODOs:
 - [X] Read the resnet paper
-- [ ] IMplement on CIFAR
+- [X] IMplement on CIFAR
 - [ ] Read attn
 
 # Week 1: Foundations
