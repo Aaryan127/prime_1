@@ -1,5 +1,4 @@
 """
-ResNet for CIFAR-10 — He et al. 2015 (arXiv:1512.03385)
 Architecture: 6n+2 layers, n=3 → 20 layers
   - stem: 3×3 conv, 16 filters
   - 3 groups of n=3 blocks: 16, 32, 64 filters
@@ -16,9 +15,6 @@ import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 
-# ---------------------------------------------------------------------------
-# Config
-# ---------------------------------------------------------------------------
 n            = 3        # blocks per group → 6n+2 = 20 layers
 EPOCHS       = 200
 BATCH_SIZE   = 128
@@ -27,10 +23,6 @@ MOMENTUM     = 0.9
 WEIGHT_DECAY = 1e-4
 LR_DROPS     = [100, 150]
 NUM_WORKERS  = 2
-
-# ---------------------------------------------------------------------------
-# Model
-# ---------------------------------------------------------------------------
 
 class BasicBlock(nn.Module):
     def __init__(self, in_planes, planes, stride=1):
@@ -87,9 +79,6 @@ class ResNet(nn.Module):
         x = x.mean(dim=[2, 3])
         return self.fc(x)
 
-# ---------------------------------------------------------------------------
-# Data
-# ---------------------------------------------------------------------------
 
 def get_dataloaders():
     mean = (0.4914, 0.4822, 0.4465)
@@ -114,9 +103,6 @@ def get_dataloaders():
     )
     return train_loader, test_loader
 
-# ---------------------------------------------------------------------------
-# Train / eval
-# ---------------------------------------------------------------------------
 
 def train_epoch(model, loader, criterion, optimizer, device):
     model.train()
@@ -147,13 +133,6 @@ def eval_epoch(model, loader, criterion, device):
         total    += x.size(0)
     return loss_sum / total, correct / total
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
-# ---------------------------------------------------------------------------
-# Plot
-# ---------------------------------------------------------------------------
 
 def plot_curves(history, save_path="curves.png"):
     epochs = range(1, len(history["tr_loss"]) + 1)
@@ -182,9 +161,6 @@ def plot_curves(history, save_path="curves.png"):
     plt.close()
     print(f"Curves saved to {save_path}")
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
 
 def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
