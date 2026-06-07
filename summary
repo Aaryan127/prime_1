@@ -1,42 +1,61 @@
-# Residual Connections, Vanishing Gradients, and Why ResNets Work
+# Actor vs Critic, Why PPO is Stable, and Why PPO is Widely Used in Robotics
 
-Vanishing Gradient Problem
+Actor vs Critic
 
-* Neural networks learn using backpropagation.
-* During backpropagation, gradients are passed from the output layer to earlier layers.
-* In very deep networks, gradients can become extremely small as they travel backward.
-* Earlier layers then receive very little learning signal and learn slowly.
-* This makes training deep networks difficult and can reduce performance.
+* PPO is based on the 'Actor-Critic' architecture.
 
-Residual Connections
+* The **Actor** is responsible for choosing actions according to a policy.
 
-* ResNets introduce residual (skip) connections.
+* Given a state, the Actor outputs the probability of taking each possible action.
 
-* A skip connection allows the input of a block to bypass a few layers and be added directly to the output.
+* The Actor's goal is to learn a policy that maximizes long-term reward.
 
-* The output of a residual block is:
+* The **Critic** evaluates the Actor's decisions.
 
-  y = F(x) + x
+* It estimates the value of a state, which represents the expected future reward from that state.
 
-  where:
+* The Critic does not choose actions; it provides feedback on how good the Actor's actions were.
 
-  * x = input
-  * F(x) = transformation learned by the layers
-  * y = final output
+* The Actor decides "what to do", while the Critic judges "how good the decision was".
 
- * Instead of learning the full mapping, the network learns only the residual difference.
+* Together, they allow more efficient and stable learning than using a policy network alone.
 
- Why ResNets Work
+Why PPO is Stable
 
-* Skip connections provide a direct path for information flow.
-* Gradients can travel through the shortcut path during backpropagation.
-* This reduces the impact of vanishing gradients.
-* Deep networks become easier to optimize and train.
-* Additional layers can learn the identity mapping if they are not needed.
+* PPO (Proximal Policy Optimization) improves a policy gradually rather than making large updates.
 
- Conclusion
+* It uses a clipped objective function that prevents the new policy from becoming too different from the old policy in a single update.
 
-* Vanishing gradients make deep networks hard to train.
-* Residual connections help gradients flow more effectively.
-* ResNets solve optimization problems in very deep networks.
-* This allows networks with hundreds of layers to be trained successfully and achieve better performance.
+* This avoids sudden policy changes that could destroy previously learned behavior.
+
+* PPO reuses collected experience for multiple training epochs, improving sample efficiency.
+
+* The Critic provides lower-variance estimates of policy quality through the advantage function.
+
+* The combination of policy clipping and Actor-Critic learning results in stable and reliable training.
+
+* Compared to many earlier reinforcement learning algorithms, PPO is easier to tune and less sensitive to hyperparameter choices.
+
+Why PPO is Widely Used in Robotics
+
+* Robotics tasks often involve continuous action spaces such as joint angles, motor torques, and velocities.
+
+* PPO naturally handles continuous control problems.
+
+* It can learn complex behaviors directly from interaction with an environment.
+
+* PPO is relatively stable during training, which is important because robotic training can be expensive and time-consuming.
+
+* It performs well across a wide range of robotic tasks without requiring major algorithmic modifications.
+
+* PPO is simple to implement and scales well to large neural networks.
+
+* Many robotic simulators and reinforcement learning frameworks provide built-in PPO implementations.
+
+* It is commonly used for robotic locomotion, manipulation, navigation, and control tasks.
+
+Conclusion
+
+* The Actor chooses actions while the Critic evaluates them.
+* PPO remains stable because it limits how much the policy can change during each update.
+* Its simplicity, stability, and strong performance on continuous control tasks have made it one of the most widely used reinforcement learning algorithms in robotics.
